@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MyReset — agence de maîtrise et d'effacement de l'empreinte numérique, dans le cadre du RGPD et du droit au déréférencement.">
+<meta name="color-scheme" content="light dark">
+<title>MyReset — Maîtrise de l'empreinte numérique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap">
+</head>
+<body>
+<style>
+  /* ---------- Tokens : clair (par défaut, non estampillé) ---------- */
+  :root {
+    --paper:        #EFF1EF;
+    --surface:      #FaFBF9;
+    --surface-2:    #F4F5F2;
+    --ink:          #16222E;
+    --ink-soft:     #55616C;
+    --ink-faint:    #8A939B;
+    --line:         #D6D9D2;
+    --line-strong:  #C2C6BD;
+    --accent:       #2E5D7C;
+    --accent-ink:   #234A64;
+    --accent-soft:  #E2EAEC;
+
+    --statement-bg:     #16222E;
+    --statement-ink:    #E8E9E4;
+    --statement-soft:   #A9B4BB;
+    --statement-line:   #33414D;
+    --statement-accent: #8FBAD4;
+
+    --maxw-read: 680px;
+    --maxw-wide: 1040px;
+    --pad: 24px;
+
+    --step--1: 0.8rem;
+    --step-0:  1.0625rem;
+    --step-1:  1.1875rem;
+    --step-2:  1.4rem;
+    --step-3:  1.85rem;
+    --step-4:  2.35rem;
+
+    --ff-display: 'Spectral', Georgia, 'Times New Roman', serif;
+    --ff-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --ff-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:        #0F161E;
+      --surface:      #151F29;
+      --surface-2:    #182430;
+      --ink:          #E7E9E4;
+      --ink-soft:     #9BA5AE;
+      --ink-faint:    #6E7883;
+      --line:         #283440;
+      --line-strong:  #35424E;
+      --accent:       #82B2CE;
+      --accent-ink:   #A6CBE0;
+      --accent-soft:  #1B2A37;
+
+      --statement-bg:     #121B24;
+      --statement-ink:    #E7E9E4;
+      --statement-soft:   #98A2AA;
+      --statement-line:   #2C3944;
+      --statement-accent: #82B2CE;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:        #0F161E;
+    --surface:      #151F29;
+    --surface-2:    #182430;
+    --ink:          #E7E9E4;
+    --ink-soft:     #9BA5AE;
+    --ink-faint:    #6E7883;
+    --line:         #283440;
+    --line-strong:  #35424E;
+    --accent:       #82B2CE;
+    --accent-ink:   #A6CBE0;
+    --accent-soft:  #1B2A37;
+
+    --statement-bg:     #121B24;
+    --statement-ink:    #E7E9E4;
+    --statement-soft:   #98A2AA;
+    --statement-line:   #2C3944;
+    --statement-accent: #82B2CE;
+  }
+
+  /* ---------- Base ---------- */
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    font-size: var(--step-0);
+    line-height: 1.62;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    line-height: 1.2;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p { margin: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+
+  .wrap {
+    max-width: var(--maxw-read);
+    margin-inline: auto;
+    padding-inline: var(--pad);
+  }
+  .wrap-wide {
+    max-width: var(--maxw-wide);
+    margin-inline: auto;
+    padding-inline: var(--pad);
+  }
+
+  .eyebrow {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 1.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.7em;
+  }
+  .eyebrow span { color: var(--accent); }
+
+  .lede {
+    font-family: var(--ff-display);
+    font-size: var(--step-2);
+    line-height: 1.42;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  /* ---------- Header ---------- */
+  .site-head {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-head__inner {
+    max-width: var(--maxw-wide);
+    margin-inline: auto;
+    padding: 14px var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .wordmark {
+    font-family: var(--ff-display);
+    font-size: 1.28rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .wordmark:hover { text-decoration: none; }
+  .wordmark b { font-weight: 500; }
+  .wordmark i {
+    font-style: normal;
+    color: var(--ink-faint);
+    font-weight: 400;
+  }
+  .wordmark::after {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 5px;
+    margin-left: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: middle;
+  }
+  .head-cta {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .head-cta:hover { color: var(--accent); text-decoration: none; }
+  @media (max-width: 560px) { .head-cta { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: clamp(3.5rem, 10vw, 7rem) 0 clamp(3.5rem, 9vw, 6rem);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 6vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.16;
+    letter-spacing: -0.012em;
+    max-width: 20ch;
+  }
+  .hero h1 .q { color: var(--ink-faint); }
+  .hero__sub {
+    margin-top: 1.9rem;
+    max-width: 46ch;
+    color: var(--ink-soft);
+    font-size: var(--step-1);
+  }
+  .hero__sub strong { color: var(--ink); font-weight: 500; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--ff-body);
+    font-size: var(--step-0);
+    font-weight: 500;
+    color: var(--surface);
+    background: var(--accent);
+    padding: 0.85em 1.5em;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); text-decoration: none; }
+  .btn:active { transform: translateY(1px); }
+  .btn--ghost {
+    color: var(--accent);
+    background: transparent;
+  }
+  .btn--ghost:hover { background: var(--accent-soft); color: var(--accent-ink); }
+
+  .hero__act {
+    margin-top: 2.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+  .microline {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+  }
+
+  /* ---------- Section rythm ---------- */
+  section { padding: clamp(3.5rem, 9vw, 6.5rem) 0; }
+  section + section { border-top: 1px solid var(--line); }
+
+  .s-head { margin-bottom: 2.8rem; }
+  .s-head h2 {
+    font-size: var(--step-4);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    max-width: 22ch;
+  }
+  .s-head p {
+    margin-top: 1.2rem;
+    max-width: 52ch;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Pour qui : situations ---------- */
+  .cases {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .case {
+    background: var(--surface);
+    padding: 1.7rem 1.6rem;
+  }
+  .case h3 {
+    font-size: var(--step-1);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .case p { color: var(--ink-soft); font-size: 0.98rem; }
+  .after-note {
+    margin-top: 2.4rem;
+    font-family: var(--ff-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--ink);
+  }
+
+  /* ---------- Services ---------- */
+  .services { display: grid; gap: 2px; }
+  .service {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding: 1.8rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .service:last-child { border-bottom: 1px solid var(--line); }
+  .service__k {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .service h3 { font-size: var(--step-2); font-weight: 400; }
+  .service p { color: var(--ink-soft); max-width: 62ch; }
+
+  /* ---------- Méthode ---------- */
+  .steps { display: grid; gap: 0; }
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.4rem;
+    padding: 1.9rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+  .step__n {
+    font-family: var(--ff-mono);
+    font-size: 1rem;
+    color: var(--ink-faint);
+    font-weight: 500;
+    padding-top: 0.15rem;
+  }
+  .step__body h3 {
+    font-size: var(--step-2);
+    font-weight: 400;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.9rem;
+  }
+  .step__delay {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .step__body p { margin-top: 0.6rem; color: var(--ink-soft); max-width: 60ch; }
+  .method-note {
+    margin-top: 2rem;
+    padding: 1.2rem 1.4rem;
+    border-left: 2px solid var(--line-strong);
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    background: var(--surface-2);
+  }
+
+  /* ---------- Reporting : avant / après ---------- */
+  .reporting { margin-top: 3.2rem; }
+  .reporting__k {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.3rem;
+  }
+  .serp-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .serp {
+    background: var(--surface);
+    padding: 1.5rem 1.5rem 1.7rem;
+  }
+  .serp__tag {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .serp__q {
+    font-family: var(--ff-mono);
+    font-size: 0.9rem;
+    color: var(--ink);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .serp__q::before { content: "\0022"; color: var(--ink-faint); }
+  .serp__q::after { content: "\0022"; color: var(--ink-faint); }
+  .res { margin-bottom: 1.1rem; }
+  .res:last-child { margin-bottom: 0; }
+  .res__t {
+    font-family: var(--ff-display);
+    font-size: 1.02rem;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+  .res__u {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    margin: 0.15rem 0 0.2rem;
+    word-break: break-all;
+  }
+  .res__s { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; }
+  .res--gone .res__t {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .res--gone .res__s { color: var(--accent-ink); }
+  .res--up .res__t { color: var(--accent-ink); font-weight: 500; }
+
+  /* ---------- Statement (cadre légal / dark) ---------- */
+  .statement {
+    background: var(--statement-bg);
+    color: var(--statement-ink);
+  }
+  .statement .s-head h2 { color: var(--statement-ink); }
+  .statement .s-head p { color: var(--statement-soft); }
+  .rights { display: grid; gap: 1.4rem; margin-bottom: 3rem; }
+  .right {
+    display: grid;
+    gap: 0.4rem;
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--statement-accent);
+  }
+  .right h3 {
+    font-size: var(--step-1);
+    font-weight: 400;
+    color: var(--statement-ink);
+  }
+  .right p { color: var(--statement-soft); font-size: 0.98rem; }
+
+  .engage {
+    border: 1px solid var(--statement-line);
+    padding: 1.8rem 1.7rem;
+  }
+  .engage h3 {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--statement-accent);
+    margin-bottom: 1.3rem;
+    font-weight: 500;
+  }
+  .engage ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
+  .engage li {
+    color: var(--statement-soft);
+    font-size: 0.98rem;
+    padding-left: 1.3rem;
+    position: relative;
+  }
+  .engage li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--statement-accent);
+  }
+  .engage li strong { color: var(--statement-ink); font-weight: 500; }
+
+  /* ---------- Confidentialité ---------- */
+  .shield { display: grid; gap: 0; }
+  .shield__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .shield__row:last-child { border-bottom: 1px solid var(--line); }
+  .shield__row h3 { font-size: var(--step-1); font-weight: 500; }
+  .shield__row p { color: var(--ink-soft); font-size: 0.98rem; max-width: 60ch; }
+
+  /* ---------- Dossiers (cas anonymisés) ---------- */
+  .files { display: grid; gap: 0; }
+  .file {
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.9rem;
+  }
+  .file:last-child { border-bottom: 1px solid var(--line); }
+  .file__meta {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .file__sit { color: var(--ink); font-size: var(--step-1); font-family: var(--ff-display); }
+  .file__grid { display: grid; gap: 1.1rem; }
+  .file dl { margin: 0; display: grid; gap: 0.25rem; }
+  .file dt {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .file dd { margin: 0; color: var(--ink-soft); font-size: 0.96rem; }
+  .file dd b { color: var(--ink); font-weight: 500; }
+  .files__disc {
+    margin-top: 1.8rem;
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    line-height: 1.6;
+    max-width: 58ch;
+  }
+
+  /* ---------- Équipe ---------- */
+  .roles { display: grid; gap: 0; margin-bottom: 2rem; }
+  .role {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .role:last-child { border-bottom: 1px solid var(--line); }
+  .role h3 { font-size: var(--step-1); font-weight: 500; }
+  .role span {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .role p { color: var(--ink-soft); font-size: 0.96rem; max-width: 58ch; }
+
+  /* ---------- FAQ ---------- */
+  .faq { display: grid; }
+  .faq details {
+    border-top: 1px solid var(--line);
+    padding: 0.3rem 0;
+  }
+  .faq details:last-of-type { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.3rem 2.2rem 1.3rem 0;
+    position: relative;
+    font-family: var(--ff-display);
+    font-size: var(--step-1);
+    color: var(--ink);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 0.2rem;
+    top: 1.15rem;
+    font-family: var(--ff-mono);
+    font-size: 1.1rem;
+    color: var(--ink-faint);
+    transition: transform .2s ease;
+  }
+  .faq details[open] summary::after { content: "\2212"; color: var(--accent); }
+  .faq details p {
+    padding: 0 0 1.5rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact { background: var(--surface-2); }
+  .form-card {
+    max-width: 520px;
+  }
+  .form-card h2 {
+    font-size: var(--step-4);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+  .form-card > p {
+    margin-top: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  form { margin-top: 2.4rem; display: grid; gap: 1.7rem; }
+  .field { display: grid; gap: 0.45rem; }
+  .field label {
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .field input, .field textarea {
+    font-family: var(--ff-body);
+    font-size: var(--step-0);
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    padding: 0.75em 0.85em;
+    width: 100%;
+    resize: vertical;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent);
+  }
+  .field .hint {
+    font-family: var(--ff-mono);
+    font-size: 0.74rem;
+    color: var(--ink-faint);
+    line-height: 1.55;
+  }
+  form .btn { justify-self: start; margin-top: 0.3rem; }
+  .form-foot {
+    font-family: var(--ff-mono);
+    font-size: 0.74rem;
+    color: var(--ink-faint);
+    line-height: 1.6;
+    max-width: 44ch;
+  }
+  .form-done {
+    border: 1px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 1.6rem 1.5rem;
+    margin-top: 2.4rem;
+    max-width: 46ch;
+  }
+  .form-done h3 {
+    font-size: var(--step-1);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .form-done p { color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 3rem 0 3.5rem;
+    color: var(--ink-soft);
+  }
+  footer .wrap-wide { display: grid; gap: 1.4rem; }
+  .foot-brand {
+    font-family: var(--ff-display);
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    font-family: var(--ff-mono);
+    font-size: var(--step--1);
+  }
+  .foot-links a { color: var(--ink-soft); }
+  .foot-fine {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    max-width: 66ch;
+    line-height: 1.6;
+  }
+  .foot-fine + .foot-fine { margin-top: -0.6rem; }
+
+  /* ---------- Reveal ---------- */
+  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- Breakpoints ---------- */
+  @media (min-width: 680px) {
+    .cases { grid-template-columns: 1fr 1fr; }
+    .service { grid-template-columns: 8rem 1fr; gap: 1.5rem; }
+    .service__k { padding-top: 0.35rem; }
+    .shield__row { grid-template-columns: 15rem 1fr; gap: 1.5rem; }
+    .file__grid { grid-template-columns: 1fr 1fr 1fr; gap: 1.6rem; }
+    .serp-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1000px) {
+    :root { --step-0: 1.09rem; }
+  }
+</style>
+
+<header class="site-head">
+  <div class="site-head__inner">
+    <a href="#top" class="wordmark"><i>My</i><b>Reset</b></a>
+    <a href="#contact" class="head-cta">Diagnostic confidentiel</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1 — HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span>MyReset</span> Maîtrise de l'empreinte numérique</p>
+      <h1>Ce que Google dit de vous <span class="q">ne devrait pas vous appartenir&nbsp;à&nbsp;moitié.</span></h1>
+      <p class="hero__sub">Audit confidentiel, plan d'action légal, surveillance continue. Nous travaillons dans le cadre du <strong>RGPD</strong> et du <strong>droit au déréférencement</strong> — avec une obligation de moyens, jamais la promesse d'un effacement total.</p>
+      <div class="hero__act">
+        <a href="#contact" class="btn">Diagnostic confidentiel gratuit</a>
+        <p class="microline">Réponse sous 24 à 48&nbsp;h · Sans engagement · Accord de confidentialité signé avant tout échange</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 — POUR QUI / LE PROBLÈME -->
+  <section id="pour-qui">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>01</span> Pour qui</p>
+        <h2>Un contenu ne définit pas une vie. En ligne, il occupe pourtant souvent la première place.</h2>
+        <p>Professions réglementées, dirigeants, candidats à un poste ou à un mandat, particuliers en reconversion : les situations se ressemblent plus qu'on ne le croit.</p>
+      </div>
+      <div class="cases reveal">
+        <div class="case">
+          <h3>Un ancien compte oublié</h3>
+          <p>Créé il y a dix ans, jamais fermé. Il expose aujourd'hui des photos et des informations que vous ne partageriez plus.</p>
+        </div>
+        <div class="case">
+          <h3>Un contenu intime qui refait surface</h3>
+          <p>Publié sans votre accord, ou dans un contexte qui n'existe plus. Il réapparaît au fil des recherches, parfois des années après.</p>
+        </div>
+        <div class="case">
+          <h3>Un article daté en tête de votre nom</h3>
+          <p>Une affaire classée, un litige résolu, une période difficile — figés en première page, sortis de leur époque.</p>
+        </div>
+        <div class="case">
+          <h3>Un site que vous ne contrôlez plus</h3>
+          <p>Un profil professionnel obsolète, une fiche d'annuaire erronée, un blog que vous avez quitté. Impossible d'y accéder, impossible de le corriger.</p>
+        </div>
+      </div>
+      <p class="after-note reveal">Aucune de ces situations n'est une faute. Toutes ont une réponse.</p>
+    </div>
+  </section>
+
+  <!-- 3 — CE QUE NOUS FAISONS -->
+  <section id="services">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>02</span> Ce que nous faisons</p>
+        <h2>Quatre leviers, employés dans l'ordre où ils sont légitimes.</h2>
+      </div>
+      <div class="services reveal">
+        <div class="service">
+          <p class="service__k">Retrait</p>
+          <div>
+            <h3>Suppression à la source</h3>
+            <p>Nous identifions l'éditeur, l'hébergeur ou la plateforme responsable et demandons le retrait du contenu sur le fondement de vos droits : article 17 du RGPD, conditions d'utilisation, atteinte à la vie privée.</p>
+          </div>
+        </div>
+        <div class="service">
+          <p class="service__k">Déréférencement</p>
+          <div>
+            <h3>Retrait des résultats Google</h3>
+            <p>Lorsque la source ne peut être supprimée, nous demandons à Google et aux autres moteurs de retirer la page des résultats associés à votre nom : droit au déréférencement, arrêt <em>Google Spain</em>, lignes directrices de la CNIL.</p>
+          </div>
+        </div>
+        <div class="service">
+          <p class="service__k">Recours</p>
+          <div>
+            <h3>Action juridique en cas de refus</h3>
+            <p>Si une demande fondée est rejetée ou ignorée, nous préparons la mise en demeure et, avec notre avocat partenaire, la saisine de la CNIL ou du juge des référés.</p>
+          </div>
+        </div>
+        <div class="service">
+          <p class="service__k">Enfouissement</p>
+          <div>
+            <h3>Repositionnement des contenus résiduels</h3>
+            <p>Ce qui ne peut être effacé peut être repoussé. Nous publions et référençons des contenus exacts et vérifiables qui reprennent leur place légitime dans les résultats, devant les contenus obsolètes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 — NOTRE MÉTHODE -->
+  <section id="methode">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>03</span> Notre méthode</p>
+        <h2>Quatre étapes, des délais annoncés, un interlocuteur unique.</h2>
+        <p>Chaque étape combine une veille automatisée sur votre nom et l'intervention d'un analyste. Vous savez en permanence où en est votre dossier.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step__n">01</div>
+          <div class="step__body">
+            <h3>Audit <span class="step__delay">3 à 5 jours</span></h3>
+            <p>Cartographie complète de votre présence : résultats Google, recherche d'images, réseaux sociaux, annuaires, archives. Vous recevez un rapport clair, hiérarchisé par niveau de risque, avec pour chaque élément la voie envisageable.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__n">02</div>
+          <div class="step__body">
+            <h3>Plan d'action <span class="step__delay">environ 1 semaine</span></h3>
+            <p>Pour chaque contenu : la voie retenue (retrait, déréférencement, enfouissement), le fondement juridique mobilisé, le délai réaliste et ce qui restera visible à la fin. Rien ne démarre sans votre validation écrite.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__n">03</div>
+          <div class="step__body">
+            <h3>Exécution <span class="step__delay">1 à 6 mois</span></h3>
+            <p>Envoi des demandes, suivi des réponses, relances, escalade juridique si nécessaire. Vous êtes informé à chaque étape par la même personne, sans avoir à réexpliquer votre situation.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__n">04</div>
+          <div class="step__body">
+            <h3>Surveillance <span class="step__delay">en continu</span></h3>
+            <p>Veille automatisée sur votre nom et vos contenus sensibles. Toute réapparition est détectée et traitée sans nouveaux frais pendant la durée du suivi. Reporting trimestriel avec capture avant / après.</p>
+          </div>
+        </div>
+      </div>
+      <p class="method-note reveal">Les délais dépendent d'interlocuteurs que nous ne contrôlons pas — plateformes, moteurs de recherche, éditeurs, juridictions. Nous nous engageons sur la rigueur et la constance du suivi, pas sur la décision d'un tiers.</p>
+
+      <div class="reporting reveal">
+        <p class="reporting__k">Reporting — ce que vous recevez</p>
+        <div class="serp-grid">
+          <div class="serp">
+            <span class="serp__tag">Avant · relevé du 12 septembre 2025</span>
+            <p class="serp__q">prénom nom</p>
+            <div class="res">
+              <p class="res__t">Forum-XY — « Le vrai visage de [nom] ? »</p>
+              <p class="res__u">forum-xy.net › discussion › 4471</p>
+              <p class="res__s">Fil ouvert en 2019, jamais modéré. 1<sup>re</sup> position.</p>
+            </div>
+            <div class="res">
+              <p class="res__t">[nom] — photos et anciennes publications</p>
+              <p class="res__u">reseau-ancien.com › u › 20194</p>
+              <p class="res__s">Compte inactif depuis 2016, toujours indexé.</p>
+            </div>
+            <div class="res">
+              <p class="res__t">Tribune locale — litige commercial (2016)</p>
+              <p class="res__u">tribune-locale.fr › archives › 2016 › 03</p>
+              <p class="res__s">Affaire résolue depuis. Article jamais mis à jour.</p>
+            </div>
+            <div class="res">
+              <p class="res__t">[Nom] [Prénom] — fiche professionnelle</p>
+              <p class="res__u">annuaire-ordre.fr › praticien</p>
+              <p class="res__s">5<sup>e</sup> position.</p>
+            </div>
+          </div>
+          <div class="serp">
+            <span class="serp__tag">Après · relevé du 3 avril 2026</span>
+            <p class="serp__q">prénom nom</p>
+            <div class="res res--up">
+              <p class="res__t">[Nom] [Prénom] — fiche professionnelle</p>
+              <p class="res__u">annuaire-ordre.fr › praticien</p>
+              <p class="res__s">1<sup>re</sup> position.</p>
+            </div>
+            <div class="res res--up">
+              <p class="res__t">[nom] — entretien métier (2025)</p>
+              <p class="res__u">media-pro.fr › entretiens</p>
+              <p class="res__s">Contenu exact, publié dans le cadre de l'enfouissement.</p>
+            </div>
+            <div class="res res--gone">
+              <p class="res__t">Forum-XY — « Le vrai visage… »</p>
+              <p class="res__s">Déréférencée sur le nom seul ; retrait demandé à la source.</p>
+            </div>
+            <div class="res res--gone">
+              <p class="res__t">reseau-ancien.com › u › 20194</p>
+              <p class="res__s">Compte fermé, sauvegardes tierces supprimées.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — CADRE LÉGAL & GARANTIES -->
+  <section id="cadre" class="statement">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>04</span> Cadre légal &amp; garanties</p>
+        <h2>Ce que la loi permet — et ce qu'elle ne permet pas.</h2>
+        <p>Notre travail repose sur des droits réels et opposables. Nous ne promettons rien qui sorte de ce cadre.</p>
+      </div>
+      <div class="rights reveal">
+        <div class="right">
+          <h3>Le droit à l'effacement — article 17 du RGPD</h3>
+          <p>Il permet d'obtenir la suppression de données personnelles dans plusieurs cas : données devenues obsolètes, traitement sans base légale, opposition légitime, retrait du consentement.</p>
+        </div>
+        <div class="right">
+          <h3>Le droit au déréférencement — arrêt <em>Google Spain</em>, CJUE</h3>
+          <p>Encadré par la CNIL, il permet de retirer une page des résultats de recherche associés à votre nom, sans supprimer la page elle-même. Il se met en balance avec l'intérêt du public à l'information.</p>
+        </div>
+        <div class="right">
+          <h3>La mise en demeure et les recours</h3>
+          <p>Lorsqu'une demande fondée est ignorée ou refusée, la mise en demeure, la plainte auprès de la CNIL et le référé devant le juge prennent le relais.</p>
+        </div>
+      </div>
+      <div class="engage reveal">
+        <h3>Nos engagements, en clair</h3>
+        <ul>
+          <li><strong>Obligation de moyens, pas de résultat.</strong> La décision finale appartient toujours à un tiers : plateforme, moteur de recherche, éditeur, juge.</li>
+          <li><strong>Effaçable ou seulement enfouissable.</strong> Comptes, publications que vous contrôlez et données sans base légale sont effaçables. Presse d'intérêt public, décisions de justice publiques et propos de tiers protégés par la liberté d'expression ne le sont pas — nous vous le disons dès l'audit, élément par élément.</li>
+          <li><strong>Aucun effacement total d'Internet.</strong> Personne ne peut l'offrir honnêtement. Nous rendons votre nom durablement plus difficile à instrumentaliser.</li>
+          <li><strong>Aucun moyen illégal.</strong> Ni intrusion, ni pression, ni fausse identité. Uniquement le droit, la méthode et la persévérance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — CONFIDENTIALITÉ & SÉCURITÉ -->
+  <section id="confidentialite">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>05</span> Confidentialité &amp; sécurité</p>
+        <h2>Le niveau de discrétion d'un cabinet, appliqué à votre dossier.</h2>
+      </div>
+      <div class="shield reveal">
+        <div class="shield__row">
+          <h3>Accord de confidentialité systématique</h3>
+          <p>Signé avant tout échange de pièces, et dans les deux sens. Il engage aussi nos partenaires.</p>
+        </div>
+        <div class="shield__row">
+          <h3>Un interlocuteur unique</h3>
+          <p>La même personne suit votre dossier du premier appel à la surveillance. Vous n'exposez votre situation qu'une seule fois.</p>
+        </div>
+        <div class="shield__row">
+          <h3>Données chiffrées, accès restreint</h3>
+          <p>Vos pièces sont stockées chiffrées et accessibles à l'équipe strictement nécessaire. Aucun sous-traitant qui ne soit couvert par un engagement équivalent.</p>
+        </div>
+        <div class="shield__row">
+          <h3>Aucune conservation inutile</h3>
+          <p>À la clôture, vos pièces sont supprimées sur simple demande. Les éléments gardés à titre de preuve sont réduits au minimum et vous sont listés.</p>
+        </div>
+        <div class="shield__row">
+          <h3>Échange sécurisé</h3>
+          <p>Transfert de documents par espace chiffré, jamais par email simple. Contact PGP disponible pour la première prise de contact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 — CAS ANONYMISÉS -->
+  <section id="cas">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>06</span> Cas anonymisés</p>
+        <h2>Trois dossiers réels, modifiés pour empêcher toute identification.</h2>
+      </div>
+      <div class="files reveal">
+        <div class="file">
+          <p class="file__meta">Profession de santé · Région Grand Est</p>
+          <p class="file__sit">Un avis diffamatoire et deux forums remontaient avant la fiche de l'Ordre.</p>
+          <div class="file__grid">
+            <dl><dt>Voie retenue</dt><dd>Retrait à la source des deux forums ; déréférencement de l'avis après mise en demeure.</dd></dl>
+            <dl><dt>Délai</dt><dd><b>4 mois</b></dd></dl>
+            <dl><dt>Résultat</dt><dd>La fiche de l'Ordre est redevenue le premier résultat. Avis toujours en ligne, mais hors des résultats au nom.</dd></dl>
+          </div>
+        </div>
+        <div class="file">
+          <p class="file__meta">Dirigeant · Secteur industriel</p>
+          <p class="file__sit">Un article de presse sur un litige commercial résolu en 2016 occupait la première page.</p>
+          <div class="file__grid">
+            <dl><dt>Voie retenue</dt><dd>La presse relevant de l'intérêt public, le retrait n'était pas envisageable. Déréférencement partiel et enfouissement.</dd></dl>
+            <dl><dt>Délai</dt><dd><b>7 mois</b></dd></dl>
+            <dl><dt>Résultat</dt><dd>Article déréférencé sur « nom + affaire », repoussé en page 2 sur le nom seul. Annoncé comme tel dès l'audit.</dd></dl>
+          </div>
+        </div>
+        <div class="file">
+          <p class="file__meta">Particulier · Reconversion professionnelle</p>
+          <p class="file__sit">Des photos issues d'un ancien réseau social apparaissaient en recherche d'images.</p>
+          <div class="file__grid">
+            <dl><dt>Voie retenue</dt><dd>Fermeture du compte dormant, suppression des sauvegardes tierces, déréférencement des images résiduelles.</dd></dl>
+            <dl><dt>Délai</dt><dd><b>3 mois</b></dd></dl>
+            <dl><dt>Résultat</dt><dd>Plus aucune image personnelle en première page de la recherche d'images au nom.</dd></dl>
+          </div>
+        </div>
+      </div>
+      <p class="files__disc reveal">Cas réels, anonymisés et modifiés (secteur, région, dates) pour empêcher toute identification. Les délais sont indicatifs et propres à chaque dossier ; ils ne valent pas engagement.</p>
+    </div>
+  </section>
+
+  <!-- 8 — L'ÉQUIPE / PARTENAIRES -->
+  <section id="equipe">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>07</span> L'équipe &amp; les partenaires</p>
+        <h2>Une équipe restreinte, par choix. Moins d'intervenants, moins d'exposition de vos données.</h2>
+      </div>
+      <div class="roles reveal">
+        <div class="role">
+          <span>Interne</span>
+          <h3>Analyste e-réputation</h3>
+          <p>Cartographie, veille, rédaction et envoi des demandes de retrait et de déréférencement, suivi opérationnel du dossier.</p>
+        </div>
+        <div class="role">
+          <span>Partenaire — avocat au barreau</span>
+          <h3>Appui juridique</h3>
+          <p>Qualification des atteintes, mises en demeure, saisines de la CNIL, procédures d'urgence devant le juge des référés.</p>
+        </div>
+        <div class="role">
+          <span>Partenaire</span>
+          <h3>Référent délégué à la protection des données</h3>
+          <p>Contrôle de la conformité RGPD de nos propres traitements et de la solidité des demandes adressées aux tiers.</p>
+        </div>
+      </div>
+      <p class="method-note reveal">Nous vous présentons nommément votre interlocuteur dès le premier rendez-vous. Nous ne les exposons pas sur cette page, pour les mêmes raisons que nous protégeons votre dossier.</p>
+    </div>
+  </section>
+
+  <!-- 9 — FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <p class="eyebrow"><span>08</span> Questions fréquentes</p>
+        <h2>Les cinq questions que l'on nous pose en premier.</h2>
+      </div>
+      <div class="faq reveal">
+        <details open>
+          <summary>Est-ce légal&nbsp;?</summary>
+          <p>Oui. Nous n'utilisons que des droits prévus par la loi : RGPD, droit au déréférencement, voies de recours devant la CNIL et le juge. Aucune méthode d'intrusion, de pression ou de dissimulation.</p>
+        </details>
+        <details>
+          <summary>Pouvez-vous tout effacer&nbsp;?</summary>
+          <p>Non, et personne ne le peut honnêtement. Nous distinguons dès l'audit ce qui est effaçable de ce qui ne peut être qu'enfoui — presse d'intérêt public, décisions de justice, propos protégés par la liberté d'expression. Vous savez à quoi vous attendre avant de vous engager.</p>
+        </details>
+        <details>
+          <summary>Combien de temps cela prend-il&nbsp;?</summary>
+          <p>Un audit en 3 à 5 jours. Les premiers retraits en quelques semaines. Un dossier complet s'étale généralement sur 1 à 6 mois selon les interlocuteurs. La surveillance est ensuite continue.</p>
+        </details>
+        <details>
+          <summary>Qui verra mon dossier&nbsp;?</summary>
+          <p>Votre interlocuteur unique et, si le dossier l'exige, l'avocat partenaire — tous deux tenus au secret professionnel et à un accord de confidentialité. Personne d'autre, et aucun sous-traitant non couvert.</p>
+        </details>
+        <details>
+          <summary>Et si le contenu réapparaît&nbsp;?</summary>
+          <p>C'est prévu. La surveillance détecte les réapparitions et nous relançons la procédure sans nouveaux frais pendant toute la durée du suivi.</p>
+        </details>
+        <details>
+          <summary>Combien cela coûte-t-il&nbsp;?</summary>
+          <p>Le diagnostic est gratuit. Ensuite, un forfait défini selon le périmètre arrêté à l'audit, communiqué par écrit avant tout engagement. Pas de facturation à la surprise.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — CTA FINAL -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="form-card reveal">
+        <p class="eyebrow"><span>09</span> Premier contact</p>
+        <h2>Commencer par un diagnostic confidentiel.</h2>
+        <p>Décrivez votre situation en une phrase. Nous revenons vers vous sous 24 à 48&nbsp;h avec un premier avis, sans engagement.</p>
+
+        <form id="reset-form" novalidate>
+          <div class="field">
+            <label for="f-nom">Nom ou pseudonyme</label>
+            <input type="text" id="f-nom" name="nom" autocomplete="off" required />
+            <p class="hint">Un prénom ou un pseudonyme suffit pour ce premier échange.</p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" autocomplete="off" required />
+            <p class="hint">Utilisé uniquement pour vous répondre. Jamais transmis, jamais réutilisé.</p>
+          </div>
+          <div class="field">
+            <label for="f-sit">Votre situation en une phrase</label>
+            <textarea id="f-sit" name="situation" rows="3" required></textarea>
+            <p class="hint">Inutile de détailler ici. Les pièces sensibles s'échangeront plus tard, par espace chiffré.</p>
+          </div>
+          <button type="submit" class="btn">Envoyer ma demande</button>
+          <p class="form-foot">En envoyant ce formulaire, vous acceptez uniquement d'être recontacté. Aucun document ne circule à ce stade. Vos informations sont traitées conformément à notre politique de confidentialité.</p>
+        </form>
+
+        <div class="form-done" id="form-done" hidden>
+          <h3>Demande enregistrée.</h3>
+          <p>Merci. Votre interlocuteur revient vers vous sous 24 à 48&nbsp;h, à l'adresse indiquée, en toute confidentialité. Si vous préférez, écrivez directement à <a href="mailto:contact@myreset.fr">contact@myreset.fr</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap-wide">
+    <p class="foot-brand"><i>My</i>Reset</p>
+    <div class="foot-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Politique de confidentialité (RGPD)</a>
+      <a href="#">Conditions générales</a>
+      <a href="mailto:dpo@myreset.fr">dpo@myreset.fr</a>
+      <a href="mailto:contact@myreset.fr">contact@myreset.fr — clé PGP sur demande</a>
+    </div>
+    <p class="foot-fine">MyReset — SASU au capital de [•]&nbsp;€ · RCS [ville] [n°] · Siège : [adresse]. Délégué à la protection des données joignable à dpo@myreset.fr.</p>
+    <p class="foot-fine">MyReset est une agence de conseil en e-réputation. Nous ne sommes ni un cabinet d'avocats, ni un service de l'État. Les actions juridiques sont conduites avec notre avocat partenaire, inscrit au barreau. Les résultats évoqués sur cette page sont propres à chaque dossier et ne constituent pas une garantie.</p>
+    <p class="foot-fine">© 2026 MyReset. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  (function () {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var revealables = document.querySelectorAll('.reveal');
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      revealables.forEach(function (el) { el.classList.add('in'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      revealables.forEach(function (el) { io.observe(el); });
+    }
+  })();
+
+  (function () {
+    var form = document.getElementById('reset-form');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nom = form.querySelector('#f-nom');
+      var email = form.querySelector('#f-email');
+      var sit = form.querySelector('#f-sit');
+      var ok = true;
+      [nom, email, sit].forEach(function (f) {
+        if (!f.value.trim()) { ok = false; f.style.borderColor = 'var(--accent)'; }
+        else { f.style.borderColor = ''; }
+      });
+      if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        ok = false; email.style.borderColor = 'var(--accent)';
+      }
+      if (!ok) return;
+      form.hidden = true;
+      var done = document.getElementById('form-done');
+      done.hidden = false;
+      done.querySelector('h3').textContent = 'Merci, ' + nom.value.trim().split(' ')[0] + '.';
+      done.focus && done.focus();
+    });
+  })();
+</script>
+
+</body>
+</html>
