@@ -25,6 +25,7 @@
     --accent:       #2E5D7C;
     --accent-ink:   #234A64;
     --accent-soft:  #E2EAEC;
+    --danger:       #A8321F;
 
     --statement-bg:     #16222E;
     --statement-ink:    #E8E9E4;
@@ -61,6 +62,7 @@
       --accent:       #82B2CE;
       --accent-ink:   #A6CBE0;
       --accent-soft:  #1B2A37;
+      --danger:       #F0A596;
 
       --statement-bg:     #121B24;
       --statement-ink:    #E7E9E4;
@@ -82,6 +84,7 @@
     --accent:       #82B2CE;
     --accent-ink:   #A6CBE0;
     --accent-soft:  #1B2A37;
+    --danger:       #F0A596;
 
     --statement-bg:     #121B24;
     --statement-ink:    #E7E9E4;
@@ -634,6 +637,10 @@
     line-height: 1.55;
   }
   form .btn { justify-self: start; margin-top: 0.3rem; }
+  .form-err {
+    font-size: 0.9rem;
+    color: var(--danger);
+  }
   .form-foot {
     font-family: var(--ff-mono);
     font-size: 0.74rem;
@@ -1069,10 +1076,14 @@
         <h2>Commencer par un diagnostic confidentiel.</h2>
         <p>Décrivez votre situation en une phrase. Nous revenons vers vous sous 24 à 48&nbsp;h avec un premier avis, sans engagement.</p>
 
-        <form id="reset-form" novalidate>
+        <form id="reset-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="f9ce24c6-4103-4a77-8967-3ad716a14b78" />
+          <input type="hidden" name="subject" value="Nouvelle demande — diagnostic confidentiel MyReset" />
+          <input type="hidden" name="from_name" value="Formulaire MyReset" />
+          <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none !important" />
           <div class="field">
             <label for="f-nom">Nom ou pseudonyme</label>
-            <input type="text" id="f-nom" name="nom" autocomplete="off" required />
+            <input type="text" id="f-nom" name="name" autocomplete="off" required />
             <p class="hint">Un prénom ou un pseudonyme suffit pour ce premier échange.</p>
           </div>
           <div class="field">
@@ -1153,11 +1164,36 @@
         ok = false; email.style.borderColor = 'var(--accent)';
       }
       if (!ok) return;
-      form.hidden = true;
-      var done = document.getElementById('form-done');
-      done.hidden = false;
-      done.querySelector('h3').textContent = 'Merci, ' + nom.value.trim().split(' ')[0] + '.';
-      done.focus && done.focus();
+
+      var btn = form.querySelector('button[type="submit"]');
+      var btnLabel = btn.textContent;
+      var prevErr = form.querySelector('.form-err');
+      if (prevErr) prevErr.remove();
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours…';
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data.success) throw new Error(data.message || 'send failed');
+          form.hidden = true;
+          var done = document.getElementById('form-done');
+          done.hidden = false;
+          done.querySelector('h3').textContent = 'Merci, ' + nom.value.trim().split(' ')[0] + '.';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = btnLabel;
+          var p = document.createElement('p');
+          p.className = 'form-err';
+          p.setAttribute('role', 'alert');
+          p.textContent = 'L’envoi a échoué. Réessayez, ou écrivez directement à contact@myreset.fr.';
+          form.insertBefore(p, form.querySelector('.form-foot'));
+        });
     });
   })();
 </script>
