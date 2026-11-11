@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="MyReset — agence de maîtrise et d'effacement de l'empreinte numérique, dans le cadre du RGPD et du droit au déréférencement.">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>MyReset — Maîtrise de l'empreinte numérique</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +29,8 @@
     --accent-ink:   #234A64;
     --accent-soft:  #E2EAEC;
     --danger:       #A8321F;
+    --logo-light:   block;
+    --logo-dark:    none;
 
     --statement-bg:     #16222E;
     --statement-ink:    #E8E9E4;
@@ -63,6 +68,8 @@
       --accent-ink:   #A6CBE0;
       --accent-soft:  #1B2A37;
       --danger:       #F0A596;
+      --logo-light:   none;
+      --logo-dark:    block;
 
       --statement-bg:     #121B24;
       --statement-ink:    #E7E9E4;
@@ -85,6 +92,8 @@
     --accent-ink:   #A6CBE0;
     --accent-soft:  #1B2A37;
     --danger:       #F0A596;
+    --logo-light:   none;
+    --logo-dark:    block;
 
     --statement-bg:     #121B24;
     --statement-ink:    #E7E9E4;
@@ -181,29 +190,11 @@
     justify-content: space-between;
     gap: 16px;
   }
-  .wordmark {
-    font-family: var(--ff-display);
-    font-size: 1.28rem;
-    letter-spacing: 0.01em;
-    color: var(--ink);
-    font-weight: 500;
-  }
+  .wordmark { display: inline-flex; align-items: center; line-height: 0; }
   .wordmark:hover { text-decoration: none; }
-  .wordmark b { font-weight: 500; }
-  .wordmark i {
-    font-style: normal;
-    color: var(--ink-faint);
-    font-weight: 400;
-  }
-  .wordmark::after {
-    content: "";
-    display: inline-block;
-    width: 5px; height: 5px;
-    margin-left: 4px;
-    border-radius: 50%;
-    background: var(--accent);
-    vertical-align: middle;
-  }
+  .logo { height: 26px; width: auto; }
+  .logo--light { display: var(--logo-light); }
+  .logo--dark  { display: var(--logo-dark); }
   .head-cta {
     font-family: var(--ff-mono);
     font-size: var(--step--1);
@@ -670,11 +661,8 @@
     color: var(--ink-soft);
   }
   footer .wrap-wide { display: grid; gap: 1.4rem; }
-  .foot-brand {
-    font-family: var(--ff-display);
-    font-size: 1.15rem;
-    color: var(--ink);
-  }
+  .foot-brand { line-height: 0; }
+  .foot-brand .logo { height: 22px; }
   .foot-links {
     display: flex;
     flex-wrap: wrap;
@@ -714,7 +702,7 @@
 
 <header class="site-head">
   <div class="site-head__inner">
-    <a href="#top" class="wordmark"><i>My</i><b>Reset</b></a>
+    <a href="#top" class="wordmark" aria-label="MyReset — accueil"><img class="logo logo--light" src="assets/logo.png" alt="MyReset" width="447" height="103"><img class="logo logo--dark" src="assets/logo-dark.png" alt="" width="447" height="103"></a>
     <a href="#contact" class="head-cta">Diagnostic confidentiel</a>
   </div>
 </header>
@@ -1112,7 +1100,7 @@
 
 <footer>
   <div class="wrap-wide">
-    <p class="foot-brand"><i>My</i>Reset</p>
+    <p class="foot-brand"><img class="logo logo--light" src="assets/logo.png" alt="MyReset" width="447" height="103"><img class="logo logo--dark" src="assets/logo-dark.png" alt="" width="447" height="103"></p>
     <div class="foot-links">
       <a href="#">Mentions légales</a>
       <a href="#">Politique de confidentialité (RGPD)</a>
