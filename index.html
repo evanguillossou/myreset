@@ -11,32 +11,36 @@
 <title>MyReset — Maîtrise de l'empreinte numérique</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 </head>
 <body>
 <style>
   /* ---------- Tokens : clair (par défaut, non estampillé) ---------- */
   :root {
-    --paper:        #EFF1EF;
-    --surface:      #FaFBF9;
-    --surface-2:    #F4F5F2;
-    --ink:          #16222E;
-    --ink-soft:     #55616C;
-    --ink-faint:    #8A939B;
-    --line:         #D6D9D2;
-    --line-strong:  #C2C6BD;
-    --accent:       #2E5D7C;
-    --accent-ink:   #234A64;
-    --accent-soft:  #E2EAEC;
+    --paper:        #F3F4EF;
+    --surface:      #FAFBF7;
+    --surface-2:    #ECEEE6;
+    --ink:          #1A2C2A;
+    --ink-soft:     #4E5D59;
+    --ink-faint:    #84908B;
+    --line:         #D9DDD2;
+    --line-strong:  #C3C9BC;
+    --accent:       #4A6A1C;
+    --accent-ink:   #3A5414;
+    --accent-soft:  #E8F1C2;
+    --lime:         #DDEE8A;
+    --btn-bg:       #1A2C2A;
+    --btn-bg-hover: #2A413E;
+    --btn-ink:      #DDEE8A;
     --danger:       #A8321F;
     --logo-light:   block;
     --logo-dark:    none;
 
-    --statement-bg:     #16222E;
-    --statement-ink:    #E8E9E4;
-    --statement-soft:   #A9B4BB;
-    --statement-line:   #33414D;
-    --statement-accent: #8FBAD4;
+    --statement-bg:     #1A2C2A;
+    --statement-ink:    #F3F4EF;
+    --statement-soft:   #AEBAB4;
+    --statement-line:   #334A46;
+    --statement-accent: #DDEE8A;
 
     --maxw-read: 680px;
     --maxw-wide: 1040px;
@@ -49,57 +53,65 @@
     --step-3:  1.85rem;
     --step-4:  2.35rem;
 
-    --ff-display: 'Spectral', Georgia, 'Times New Roman', serif;
-    --ff-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --ff-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    --ff-body: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --ff-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper:        #0F161E;
-      --surface:      #151F29;
-      --surface-2:    #182430;
-      --ink:          #E7E9E4;
-      --ink-soft:     #9BA5AE;
-      --ink-faint:    #6E7883;
-      --line:         #283440;
-      --line-strong:  #35424E;
-      --accent:       #82B2CE;
-      --accent-ink:   #A6CBE0;
-      --accent-soft:  #1B2A37;
+      --paper:        #101B19;
+      --surface:      #162421;
+      --surface-2:    #1A2A27;
+      --ink:          #ECEEE6;
+      --ink-soft:     #A3AFAA;
+      --ink-faint:    #75827D;
+      --line:         #263633;
+      --line-strong:  #34463F;
+      --accent:       #DDEE8A;
+      --accent-ink:   #EAF5B4;
+      --accent-soft:  #26341E;
+      --lime:         #DDEE8A;
+      --btn-bg:       #DDEE8A;
+      --btn-bg-hover: #EAF5B4;
+      --btn-ink:      #1A2C2A;
       --danger:       #F0A596;
       --logo-light:   none;
       --logo-dark:    block;
 
-      --statement-bg:     #121B24;
-      --statement-ink:    #E7E9E4;
-      --statement-soft:   #98A2AA;
-      --statement-line:   #2C3944;
-      --statement-accent: #82B2CE;
+      --statement-bg:     #0B1412;
+      --statement-ink:    #ECEEE6;
+      --statement-soft:   #9AA6A1;
+      --statement-line:   #23332F;
+      --statement-accent: #DDEE8A;
     }
   }
 
   :root[data-theme="dark"] {
-    --paper:        #0F161E;
-    --surface:      #151F29;
-    --surface-2:    #182430;
-    --ink:          #E7E9E4;
-    --ink-soft:     #9BA5AE;
-    --ink-faint:    #6E7883;
-    --line:         #283440;
-    --line-strong:  #35424E;
-    --accent:       #82B2CE;
-    --accent-ink:   #A6CBE0;
-    --accent-soft:  #1B2A37;
+    --paper:        #101B19;
+    --surface:      #162421;
+    --surface-2:    #1A2A27;
+    --ink:          #ECEEE6;
+    --ink-soft:     #A3AFAA;
+    --ink-faint:    #75827D;
+    --line:         #263633;
+    --line-strong:  #34463F;
+    --accent:       #DDEE8A;
+    --accent-ink:   #EAF5B4;
+    --accent-soft:  #26341E;
+    --lime:         #DDEE8A;
+    --btn-bg:       #DDEE8A;
+    --btn-bg-hover: #EAF5B4;
+    --btn-ink:      #1A2C2A;
     --danger:       #F0A596;
     --logo-light:   none;
     --logo-dark:    block;
 
-    --statement-bg:     #121B24;
-    --statement-ink:    #E7E9E4;
-    --statement-soft:   #98A2AA;
-    --statement-line:   #2C3944;
-    --statement-accent: #82B2CE;
+    --statement-bg:     #0B1412;
+    --statement-ink:    #ECEEE6;
+    --statement-soft:   #9AA6A1;
+    --statement-line:   #23332F;
+    --statement-accent: #DDEE8A;
   }
 
   /* ---------- Base ---------- */
@@ -121,8 +133,9 @@
 
   h1, h2, h3 {
     font-family: var(--ff-display);
-    font-weight: 400;
-    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.18;
     text-wrap: balance;
     margin: 0;
   }
@@ -211,11 +224,11 @@
     border-bottom: 1px solid var(--line);
   }
   .hero h1 {
-    font-size: clamp(2.1rem, 6vw, 3.6rem);
-    font-weight: 300;
-    line-height: 1.16;
-    letter-spacing: -0.012em;
-    max-width: 20ch;
+    font-size: clamp(2.2rem, 6.2vw, 3.9rem);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    max-width: 18ch;
   }
   .hero h1 .q { color: var(--ink-faint); }
   .hero__sub {
@@ -224,7 +237,7 @@
     color: var(--ink-soft);
     font-size: var(--step-1);
   }
-  .hero__sub strong { color: var(--ink); font-weight: 500; }
+  .hero__sub strong { color: var(--ink); font-weight: 600; }
 
   .btn {
     display: inline-flex;
@@ -232,16 +245,16 @@
     gap: 0.6em;
     font-family: var(--ff-body);
     font-size: var(--step-0);
-    font-weight: 500;
-    color: var(--surface);
-    background: var(--accent);
+    font-weight: 600;
+    color: var(--btn-ink);
+    background: var(--btn-bg);
     padding: 0.85em 1.5em;
-    border: 1px solid var(--accent);
+    border: 1px solid var(--btn-bg);
     border-radius: 2px;
     cursor: pointer;
     transition: background .18s ease, transform .18s ease;
   }
-  .btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); text-decoration: none; }
+  .btn:hover { background: var(--btn-bg-hover); border-color: var(--btn-bg-hover); text-decoration: none; }
   .btn:active { transform: translateY(1px); }
   .btn--ghost {
     color: var(--accent);
@@ -271,8 +284,8 @@
   .s-head { margin-bottom: 2.8rem; }
   .s-head h2 {
     font-size: var(--step-4);
-    font-weight: 300;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     max-width: 22ch;
   }
   .s-head p {
@@ -294,7 +307,6 @@
   }
   .case h3 {
     font-size: var(--step-1);
-    font-weight: 500;
     margin-bottom: 0.5rem;
   }
   .case p { color: var(--ink-soft); font-size: 0.98rem; }
@@ -302,6 +314,7 @@
     margin-top: 2.4rem;
     font-family: var(--ff-display);
     font-style: italic;
+    font-weight: 500;
     font-size: var(--step-1);
     color: var(--ink);
   }
@@ -322,7 +335,7 @@
     color: var(--accent);
     letter-spacing: 0.06em;
   }
-  .service h3 { font-size: var(--step-2); font-weight: 400; }
+  .service h3 { font-size: var(--step-2); }
   .service p { color: var(--ink-soft); max-width: 62ch; }
 
   /* ---------- Méthode ---------- */
@@ -344,7 +357,6 @@
   }
   .step__body h3 {
     font-size: var(--step-2);
-    font-weight: 400;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -411,6 +423,7 @@
   .res__t {
     font-family: var(--ff-display);
     font-size: 1.02rem;
+    font-weight: 500;
     color: var(--accent);
     line-height: 1.3;
   }
@@ -446,7 +459,6 @@
   }
   .right h3 {
     font-size: var(--step-1);
-    font-weight: 400;
     color: var(--statement-ink);
   }
   .right p { color: var(--statement-soft); font-size: 0.98rem; }
@@ -489,7 +501,7 @@
     border-top: 1px solid var(--line);
   }
   .shield__row:last-child { border-bottom: 1px solid var(--line); }
-  .shield__row h3 { font-size: var(--step-1); font-weight: 500; }
+  .shield__row h3 { font-size: var(--step-1); }
   .shield__row p { color: var(--ink-soft); font-size: 0.98rem; max-width: 60ch; }
 
   /* ---------- Dossiers (cas anonymisés) ---------- */
@@ -508,7 +520,7 @@
     color: var(--accent);
     text-transform: uppercase;
   }
-  .file__sit { color: var(--ink); font-size: var(--step-1); font-family: var(--ff-display); }
+  .file__sit { color: var(--ink); font-size: var(--step-1); font-family: var(--ff-display); font-weight: 600; letter-spacing: -0.01em; }
   .file__grid { display: grid; gap: 1.1rem; }
   .file dl { margin: 0; display: grid; gap: 0.25rem; }
   .file dt {
@@ -538,7 +550,7 @@
     border-top: 1px solid var(--line);
   }
   .role:last-child { border-bottom: 1px solid var(--line); }
-  .role h3 { font-size: var(--step-1); font-weight: 500; }
+  .role h3 { font-size: var(--step-1); }
   .role span {
     font-family: var(--ff-mono);
     font-size: var(--step--1);
@@ -588,8 +600,8 @@
   }
   .form-card h2 {
     font-size: var(--step-4);
-    font-weight: 300;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
   }
   .form-card > p {
     margin-top: 1.1rem;
@@ -648,7 +660,6 @@
   }
   .form-done h3 {
     font-size: var(--step-1);
-    font-weight: 500;
     color: var(--ink);
     margin-bottom: 0.6rem;
   }
