@@ -1053,7 +1053,7 @@
         </details>
         <details>
           <summary>Qui verra mon dossier&nbsp;?</summary>
-          <p>Votre interlocuteur unique et, si le dossier l'exige, l'avocat partenaire — tous deux tenus au secret professionnel et à un accord de confidentialité. Personne d'autre, et aucun sous-traitant non couvert.</p>
+          <p>Votre interlocuteur unique et, si le dossier l'exige, l'avocat partenaire — tous deux tenus au secret professionnel et à un accord de confidentialité. Personne d'autre. Nos prestataires techniques (réception du formulaire, pré-analyse automatisée) n'interviennent que dans le cadre d'un accord de traitement des données.</p>
         </details>
         <details>
           <summary>Et si le contenu réapparaît&nbsp;?</summary>
@@ -1095,8 +1095,13 @@
             <textarea id="f-sit" name="situation" rows="3" required></textarea>
             <p class="hint">Inutile de détailler ici. Les pièces sensibles s'échangeront plus tard, par espace chiffré.</p>
           </div>
+          <div class="field">
+            <label for="f-google">Votre nom tel qu'il apparaît sur Google <span style="text-transform:none;letter-spacing:0">(facultatif)</span></label>
+            <input type="text" id="f-google" name="nom_google" autocomplete="off" maxlength="150" />
+            <p class="hint">Si vous l'indiquez, nous regardons ce qui ressort aujourd'hui d'une recherche publique sur ce nom. Vous pouvez le laisser vide.</p>
+          </div>
           <button type="submit" class="btn">Envoyer ma demande</button>
-          <p class="form-foot">En envoyant ce formulaire, vous acceptez uniquement d'être recontacté. Aucun document ne circule à ce stade. Vos informations sont traitées conformément à notre politique de confidentialité.</p>
+          <p class="form-foot">En envoyant ce formulaire, vous acceptez uniquement d'être recontacté. Aucun document ne circule à ce stade. Votre demande fait l'objet d'une pré-analyse automatisée, toujours relue par votre interlocuteur avant toute réponse. Vos informations sont traitées conformément à notre politique de confidentialité.</p>
         </form>
 
         <div class="form-done" id="form-done" hidden>
@@ -1179,6 +1184,16 @@
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (!data.success) throw new Error(data.message || 'send failed');
+          // Demande bien reçue : on déclenche la pré-analyse (brouillon pour l'interlocuteur).
+          fetch('/api/demande', {
+            method: 'POST',
+            keepalive: true,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: nom.value, email: email.value, situation: sit.value,
+              nom_google: form.querySelector('#f-google').value
+            })
+          }).catch(function () {});
           form.hidden = true;
           var done = document.getElementById('form-done');
           done.hidden = false;
